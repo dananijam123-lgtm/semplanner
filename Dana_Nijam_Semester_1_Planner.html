@@ -1,0 +1,1071 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#13253b">
+  <title>Dana Nijam | Semester I Study Planner</title>
+  <style>
+    :root {
+      --ink: #18263a;
+      --muted: #69788d;
+      --paper: #f5f6f8;
+      --card: #ffffff;
+      --line: #e4e8ee;
+      --navy: #0b1d3a;
+      --blue: #d5aa62;
+      --mint: #dff3e8;
+      --green: #287b58;
+      --gold: #f3bb56;
+      --shadow: 0 12px 35px rgba(24, 38, 58, .07);
+      --math: #4771dc;
+      --physics: #9b63c5;
+      --history: #c77643;
+      --english: #27937e;
+      --malayalam: #cf6682;
+      --review: #65758b;
+      --economics: #37869b;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 15px/1.52 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    button, select { font: inherit; }
+    button { cursor: pointer; }
+    .shell { width: min(1160px, calc(100% - 36px)); margin: 28px auto 70px; }
+    .masthead { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+    .brand { display: flex; align-items: center; gap: 11px; color: var(--navy); font-weight: 800; letter-spacing: .04em; text-transform: uppercase; font-size: 12px; }
+    .brand-mark { display: grid; place-items: center; width: 37px; height: 37px; border-radius: 12px; color: #fff; background: var(--navy); font-size: 17px; }
+    .mast-note { color: var(--muted); font-size: 12px; }
+    .hero {
+      position: relative; overflow: hidden; display: grid; grid-template-columns: 1.35fr .65fr; gap: 22px;
+      padding: clamp(24px, 4vw, 42px); border-radius: 24px; background: var(--navy); color: #fff; box-shadow: var(--shadow);
+    }
+    .hero::after { content: ""; position: absolute; width: 320px; height: 320px; right: 12%; top: -210px; border: 1px solid rgba(255,255,255,.13); border-radius: 50%; box-shadow: 0 0 0 38px rgba(255,255,255,.035), 0 0 0 78px rgba(255,255,255,.025); pointer-events: none; }
+    .eyebrow { color: #bbd0fb; font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 10px 0 7px; font-size: clamp(30px, 5vw, 48px); line-height: 1.04; letter-spacing: -.045em; }
+    .hero-sub { max-width: 610px; margin: 0; color: #d2dbea; font-size: 15px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 21px; }
+    .hero-meta span { padding: 7px 10px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; color: #edf2fa; font-size: 12px; }
+    .hero-side { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 13px; }
+    .progress-label { display: flex; justify-content: space-between; width: 100%; color: #d8e1ee; font-size: 12px; }
+    .progress-label strong { color: #fff; }
+    .progress-track { height: 9px; width: 100%; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.17); }
+    .progress-fill { height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, #d5aa62, #f4d49a); transition: width .25s ease; }
+    .progress-caption { margin-top: -6px; color: #b9c7da; font-size: 11px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .btn { border: 0; border-radius: 10px; padding: 9px 12px; font-size: 12px; font-weight: 750; }
+    .btn-light { background: #fff; color: var(--navy); }
+    .btn-ghost { border: 1px solid rgba(255,255,255,.28); background: transparent; color: #fff; }
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin: 16px 0 24px; }
+    .metric { padding: 15px 17px; border: 1px solid var(--line); border-radius: 15px; background: var(--card); }
+    .metric-label { color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .metric strong { display: block; margin-top: 4px; color: var(--navy); font-size: 21px; letter-spacing: -.03em; }
+    .metric small { color: var(--muted); font-size: 11px; }
+    .app-tabs { position: sticky; top: 0; z-index: 5; display: flex; gap: 5px; overflow-x: auto; margin: 0 0 18px; padding: 8px; border: 1px solid var(--line); border-radius: 13px; background: rgba(255,255,255,.94); box-shadow: 0 5px 16px rgba(11,29,58,.06); backdrop-filter: blur(10px); }
+    .tab-button { flex: 1 0 auto; border: 0; border-radius: 8px; padding: 9px 12px; color: var(--muted); background: transparent; font-size: 12px; font-weight: 800; }
+    .tab-button.active { color: var(--navy); background: var(--gold-pale, #f7f1e6); }
+    .app-page { min-height: 350px; }
+    .hidden { display: none !important; }
+    .dashboard-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 13px; }
+    .panel { padding: 18px; border: 1px solid var(--line); border-radius: 15px; background: #fff; box-shadow: 0 3px 14px rgba(11,29,58,.04); }
+    .panel h2 { margin: 3px 0 7px; color: var(--navy); font-size: 19px; }
+    .panel h3 { margin: 5px 0; color: var(--navy); font-size: 14px; }
+    .muted { color: var(--muted); font-size: 12px; }
+    .panel .eyebrow { color: #927447; }
+    .shortcut-dialog { width: min(540px, calc(100% - 28px)); max-height: min(85vh, 760px); padding: 22px; border: 1px solid var(--line); border-radius: 18px; color: var(--ink); box-shadow: 0 24px 80px rgba(11,29,58,.28); }
+    .shortcut-dialog::backdrop { background: rgba(9,20,38,.55); backdrop-filter: blur(3px); }
+    .shortcut-dialog h2 { margin: 0 0 7px; color: var(--navy); font-size: 21px; }
+    .shortcut-dialog p, .shortcut-dialog li { color: var(--muted); font-size: 12px; }
+    .shortcut-dialog ul { padding-left: 20px; }
+    .shortcut-dialog li { margin: 8px 0; }
+    .panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .small-button { border: 1px solid var(--line); border-radius: 8px; padding: 7px 9px; color: var(--navy); background: #fff; font-size: 11px; font-weight: 750; }
+    .routine-list { display: grid; gap: 0; margin-top: 10px; }
+    .routine-item { display: grid; grid-template-columns: 122px 1fr; gap: 12px; padding: 9px 0; border-top: 1px solid #edf0f4; }
+    .routine-item time { color: #587098; font-size: 11px; font-weight: 850; }
+    .routine-item > span { color: var(--muted); font-size: 10px; }
+    .routine-time { color: #587098; font-size: 11px; font-weight: 850; }
+    .routine-text strong { display: block; color: var(--ink); font-size: 11px; }
+    .routine-text span { color: var(--muted); font-size: 10px; }
+    .routine-editor { margin-top: 10px; padding: 10px; border-radius: 10px; background: #f8f9fb; }
+    .routine-editor summary { cursor: pointer; color: var(--navy); font-size: 11px; font-weight: 800; }
+    .time-edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; margin: 12px 0; }
+    .time-edit-grid label { color: var(--muted); font-size: 10px; font-weight: 750; }
+    .time-edit-grid label span { display: flex; align-items: center; gap: 5px; margin-top: 4px; }
+    .time-edit-grid input { width: 100%; min-width: 0; border: 1px solid var(--line); border-radius: 7px; padding: 6px 4px; color: var(--ink); background: #fff; font-size: 11px; }
+    .time-edit-grid i { color: var(--muted); font-size: 9px; font-style: normal; }
+    .btn-primary { background: var(--navy); color: #fff; }
+    .btn-secondary { margin-left: 5px; border: 1px solid var(--line); background: #fff; color: var(--navy); }
+    .catchup-item { display: block; padding: 8px 0; border-top: 1px solid #edf0f4; }
+    .catchup-item .task-row { margin-bottom: 3px; }
+    .catchup-item span { color: var(--ink); font-size: 11px; }
+    .catchup-item small { display: block; color: var(--muted); font-size: 9px; }
+    .catchup-item button { flex: none; border: 1px solid var(--line); border-radius: 7px; padding: 5px 7px; color: var(--navy); background: #fff; font-size: 9px; font-weight: 800; }
+    .calendar-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 13px; }
+    .monthbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 9px; }
+    .monthbar h2 { margin: 0; color: var(--navy); font: 500 20px Georgia,serif; }
+    .month-nav { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 8px; color: var(--navy); background: #fff; font-size: 21px; }
+    .weekdays, .month-grid { display: grid; grid-template-columns: repeat(7,minmax(0,1fr)); gap: 5px; }
+    .weekdays span { padding: 4px 0; color: var(--muted); text-align: center; font-size: 9px; font-weight: 850; }
+    .month-day { min-height: 66px; padding: 5px; border: 1px solid var(--line); border-radius: 8px; color: var(--navy); background: #fff; text-align: left; }
+    .month-day > span:first-child { display: block; font-size: 10px; font-weight: 850; }
+    .month-day.has-plan { background: #f7fafc; }
+    .month-day.blank { visibility: hidden; border-color: transparent; }
+    .month-badge { display: inline-block; margin-top: 5px; padding: 2px 5px; border-radius: 999px; color: #52637a; background: #e9edf3; font-size: 8px; font-weight: 750; }
+    .month-day.outside { color: #a9b1be; background: #f8f9fb; }
+    .month-day.disabled { opacity: .38; cursor: default; }
+    .month-day.selected { outline: 2px solid var(--gold); background: #fbf8f1; }
+    .month-day.is-today { border-color: var(--blue); }
+    .month-day strong { display: block; font-size: 10px; }
+    .month-day small { display: block; margin-top: 3px; color: var(--muted); font-size: 8px; line-height: 1.25; }
+    .month-day .mini-progress { height: 4px; margin-top: 5px; overflow: hidden; border-radius: 8px; background: #e9edf3; }
+    .month-day .mini-progress i { display: block; height: 100%; background: var(--gold); }
+    .legend { margin-top: 9px; color: var(--muted); font-size: 10px; }
+    .selected-head { display: flex; align-items: start; justify-content: space-between; gap: 10px; }
+    .selected-head h2 { margin: 3px 0 5px; color: var(--navy); font-size: 17px; }
+    .day-type-label { display: block; margin: 10px 0 4px; color: var(--muted); font-size: 10px; font-weight: 750; }
+    .day-kind { width: 100%; }
+    .routine-hint { margin: 8px 0; color: var(--muted); font-size: 10px; }
+    .selected-tasks .task-row { grid-template-columns: 16px 1fr; }
+    .task-time { display: block; margin: 2px 0 3px; color: #47648f; font-size: 9px; font-weight: 850; text-decoration: none; }
+    .tick-state { display: block; color: #8a6a30; font-size: 8px; text-decoration: none; }
+    .task-row.is-open .tick-state { color: #187247; }
+    .task-row.is-late .tick-state { color: #b4232c; }
+    .catchup-button { margin-top: 4px; border: 1px solid #ead5aa; border-radius: 6px; padding: 4px 6px; color: #705b35; background: #fff8e9; font-size: 8px; font-weight: 750; }
+    .strategy-grid, .practice-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+    .strategy-grid .panel h3 { margin-top: 7px; }
+    .strategy-grid .panel p, .strategy-note p, .strategy-note li { color: var(--muted); font-size: 12px; }
+    .phase-number { color: #a17a3e; font: 700 28px Georgia,serif; }
+    .strategy-note { margin-top: 12px; }
+    .practice-grid { grid-template-columns: 1fr 1fr; }
+    .practice-label, #doubt-form label { display: block; margin: 10px 0 4px; color: var(--muted); font-size: 10px; font-weight: 750; }
+    #practice-subject, #doubt-form input, #doubt-form textarea, #doubt-form select { width: 100%; margin-top: 4px; border: 1px solid var(--line); border-radius: 8px; padding: 8px; color: var(--ink); background: #fff; }
+    .question-card { min-height: 85px; margin: 12px 0; padding: 12px; border-radius: 10px; background: #f7f8fb; color: var(--ink); font-size: 12px; }
+    .question-card strong { display: block; margin-bottom: 4px; color: #927447; font-size: 9px; text-transform: uppercase; }
+    .answer-guide { margin: 10px 0; padding: 10px; border-left: 3px solid var(--gold); border-radius: 6px; background: #fbf8f1; color: var(--muted); font-size: 11px; }
+    .doubt-list { margin-top: 12px; }
+    .doubt-item { margin-top: 8px; padding: 10px; border: 1px solid var(--line); border-radius: 9px; background: #fafbfc; }
+    .doubt-item > strong { display: block; margin: 5px 0 4px; color: var(--ink); font-size: 12px; }
+    .doubt-subject { color: var(--navy) !important; font-size: 10px !important; font-weight: 800; }
+    .doubt-date { float: right; color: var(--muted) !important; font-size: 9px !important; }
+    .doubt-item.is-solved { opacity: .68; }
+    .doubt-actions { display: flex; gap: 6px; }
+    .doubt-actions button { border: 1px solid var(--line); border-radius: 7px; padding: 5px 8px; color: var(--navy); background: #fff; }
+    .practice-subject { color: #927447; font-size: 9px; font-weight: 850; letter-spacing: .07em; text-transform: uppercase; }
+    .doubt-item h3 { margin: 0 0 4px; font-size: 12px; }
+    .doubt-item p { margin: 3px 0; color: var(--muted); font-size: 10px; white-space: pre-wrap; }
+    .doubt-item button { margin-top: 5px; border: 0; color: #8e3848; background: transparent; font-size: 9px; font-weight: 800; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin: 30px 0 13px; }
+    .section-head h2 { margin: 0; color: var(--navy); font-size: 22px; letter-spacing: -.025em; }
+    .section-head p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+    .toolbar { display: flex; align-items: center; gap: 9px; }
+    .toolbar label { color: var(--muted); font-size: 12px; }
+    select { min-width: 145px; padding: 8px 30px 8px 10px; border: 1px solid var(--line); border-radius: 9px; color: var(--ink); background: #fff; }
+    .phase { margin: 27px 0 12px; display: flex; align-items: center; gap: 10px; color: var(--navy); font-weight: 800; }
+    .phase .phase-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px #e0f1e7; }
+    .phase small { margin-left: auto; color: var(--muted); font-size: 11px; font-weight: 600; }
+    .week { margin: 12px 0 17px; padding: 15px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,.62); }
+    .week-title { display: flex; justify-content: space-between; gap: 12px; margin: 0 2px 11px; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .week-title strong { color: var(--navy); }
+    .day-grid { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 9px; }
+    .day-card { min-height: 190px; padding: 11px 10px; border: 1px solid var(--line); border-radius: 13px; background: #fff; transition: border .18s ease, transform .18s ease; }
+    .day-card:hover { transform: translateY(-2px); border-color: #c8d2e0; }
+    .day-card.is-today { border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); }
+    .day-card.is-complete { background: #f4fbf6; }
+    .day-top { display: flex; justify-content: space-between; align-items: start; gap: 5px; margin-bottom: 9px; }
+    .day-date { color: var(--navy); font-size: 12px; font-weight: 850; }
+    .day-weekday { display: block; color: var(--muted); font-size: 10px; font-weight: 600; }
+    .today-tag { padding: 2px 5px; border-radius: 999px; color: #fff; background: var(--blue); font-size: 8px; font-weight: 800; letter-spacing: .04em; }
+    .task-row { display: grid; grid-template-columns: 14px 1fr; gap: 7px; align-items: start; margin: 0 0 8px; padding: 7px 6px; border-radius: 8px; background: #f8f9fb; }
+    .task-row input { width: 14px; height: 14px; margin: 2px 0 0; accent-color: var(--green); cursor: pointer; }
+    .task-text { min-width: 0; color: #34445a; font-size: 10.5px; line-height: 1.38; }
+    .task-status { display: block; margin-top: 3px; color: #8a6a30; font-size: 8px; text-decoration: none; }
+    .task-row:has(input:not(:disabled)) .task-status { color: #187247; }
+    .task-row input:disabled { opacity: .45; cursor: not-allowed; }
+    .task-row .catchup-button { grid-column: 2; justify-self: start; }
+    .task-text strong { display: block; margin-bottom: 2px; font-size: 9px; letter-spacing: .04em; text-transform: uppercase; }
+    .task-row[data-course="math"] .task-text strong { color: var(--math); }
+    .task-row[data-course="physics"] .task-text strong { color: var(--physics); }
+    .task-row[data-course="history"] .task-text strong { color: var(--history); }
+    .task-row[data-course="economics"] .task-text strong { color: var(--economics); }
+    .task-row[data-course="english"] .task-text strong { color: var(--english); }
+    .task-row[data-course="malayalam"] .task-text strong { color: var(--malayalam); }
+    .task-row[data-course="review"] .task-text strong { color: var(--review); }
+    .task-row.is-done .task-text { color: #8692a1; text-decoration: line-through; }
+    .duration { display: inline-block; margin-top: 3px; color: #8290a1; font-size: 9px; text-decoration: none; }
+    .light-day { min-height: 134px; background: #fbfcfd; }
+    .phase-review .phase-dot { background: var(--gold); box-shadow: 0 0 0 4px #fff4d9; }
+    .phase-review .week { background: #fffcf5; }
+    .coverage-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .syllabus-card { overflow: hidden; border: 1px solid var(--line); border-left: 4px solid var(--course-color); border-radius: 14px; background: #fff; }
+    .syllabus-card[hidden] { display: none; }
+    .syllabus-card summary { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 14px 15px; cursor: pointer; list-style: none; }
+    .syllabus-card summary::-webkit-details-marker { display: none; }
+    .course-title { display: block; color: var(--navy); font-size: 14px; font-weight: 800; }
+    .course-code { display: block; margin-top: 2px; color: var(--muted); font-size: 10px; }
+    .course-type { white-space: nowrap; color: var(--muted); font-size: 10px; }
+    .module-list { display: grid; gap: 0; padding: 0 15px 8px; }
+    .module { display: grid; grid-template-columns: 15px 1fr; gap: 8px; padding: 9px 0; border-top: 1px solid #eef0f3; }
+    .module input { width: 14px; height: 14px; margin: 3px 0 0; accent-color: var(--green); }
+    .module strong { display: block; margin-bottom: 2px; color: var(--ink); font-size: 11px; }
+    .module span { display: block; color: var(--muted); font-size: 10.5px; line-height: 1.45; }
+    .notice { margin: 14px 0 0; padding: 13px 15px; border: 1px solid #eedeb8; border-radius: 12px; background: #fff9e9; color: #6d5724; font-size: 11px; }
+    .notice strong { color: #4f3b0e; }
+    .footer { display: flex; justify-content: space-between; gap: 18px; margin-top: 23px; padding-top: 13px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; }
+    .empty { padding: 18px; color: var(--muted); text-align: center; font-size: 12px; }
+    [hidden] { display: none !important; }
+    @media (max-width: 950px) {
+      .day-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+      .day-card { min-height: 165px; }
+      .dashboard-grid { grid-template-columns: 1fr 1fr; }
+      .calendar-layout { grid-template-columns: 1fr; }
+      .strategy-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 650px) {
+      .shell { width: min(100% - 22px, 560px); margin-top: 12px; }
+      .masthead { align-items: flex-start; }
+      .mast-note { max-width: 130px; text-align: right; }
+      .hero { grid-template-columns: 1fr; gap: 24px; border-radius: 18px; }
+      .metrics { grid-template-columns: 1fr 1fr; }
+      .metric:last-child { grid-column: 1 / -1; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .toolbar { width: 100%; }
+      .toolbar select { flex: 1; }
+      .day-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .day-card { min-height: 150px; }
+      .coverage-grid { grid-template-columns: 1fr; }
+      .dashboard-grid, .practice-grid { grid-template-columns: 1fr; }
+      .month-day { min-height: 55px; padding: 4px; }
+      .month-grid, .weekdays { gap: 3px; }
+      .routine-item { grid-template-columns: 98px 1fr; }
+      .time-edit-grid { grid-template-columns: 1fr; }
+      .app-tabs { top: 0; }
+      .footer { flex-direction: column; }
+    }
+    @media print {
+      body { background: #fff; font-size: 11px; }
+      .shell { width: 100%; margin: 0; }
+      .masthead { margin: 0 0 8px; }
+      .hero { padding: 17px; border-radius: 10px; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .hero::after, .hero-actions, .toolbar, .mast-note, .app-tabs, .routine-editor, .month-nav, .day-kind, .day-type-label, .catchup-button { display: none !important; }
+      .metrics { margin: 8px 0; gap: 6px; }
+      .metric { padding: 7px 9px; }
+      .section-head { margin: 15px 0 7px; }
+      .week { margin: 7px 0; padding: 7px; break-inside: avoid; }
+      .day-grid { grid-template-columns: repeat(4, 1fr); }
+      .day-card { min-height: 0; padding: 7px; break-inside: avoid; }
+      .task-row { padding: 4px; margin-bottom: 4px; }
+      .coverage-grid { grid-template-columns: 1fr 1fr; }
+      .syllabus-card { break-inside: avoid; }
+      .syllabus-card:not([open]) > .module-list { display: grid !important; }
+      .app-page.hidden { display: block !important; }
+      .calendar-layout { grid-template-columns: 1fr 1fr; }
+      .month-day { min-height: 50px; }
+      .notice, .footer { font-size: 9px; }
+      button, select { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="masthead">
+      <div class="brand"><span class="brand-mark">D</span><span>Semester I Planner</span></div>
+      <div class="mast-note">Private to this browser · No account or passcode</div>
+    </div>
+
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <div class="eyebrow">FYUGP · BA Ecomaths · December exam preparation</div>
+        <h1 id="page-title">Dana Nijam</h1>
+        <p class="hero-sub">A practical day-by-day plan to finish the Semester I portions, then revise and practise before the December examination.</p>
+        <div class="hero-meta">
+          <span>Study starts · 15 Oct 2026</span>
+          <span>Portions complete · 20 Nov</span>
+          <span>Revision window · 21–30 Nov</span>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="progress-label"><span>Plan progress</span><strong id="progress-count">0%</strong></div>
+        <div class="progress-track" role="progressbar" aria-label="Plan progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-caption" id="progress-caption">0 of 111 study and revision targets checked</div>
+        <div class="hero-actions">
+          <button class="btn btn-light" id="print-button" type="button">Print / Save PDF</button>
+          <button class="btn btn-light" id="shortcut-button" type="button">Add to home screen</button>
+          <button class="btn btn-ghost" id="reset-button" type="button">Reset progress</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics" aria-label="Schedule milestones">
+      <div class="metric"><span class="metric-label">First-pass finish</span><strong>20 Nov</strong><small>All listed modules scheduled by this date</small></div>
+      <div class="metric"><span class="metric-label">Revision days</span><strong>10 days</strong><small>21–30 November · practice and recall</small></div>
+      <div class="metric"><span class="metric-label">Syllabus map</span><strong id="coverage-count">0 / 29</strong><small>Tick a module after you can explain it</small></div>
+    </section>
+
+    <nav class="app-tabs" aria-label="Planner sections">
+      <button class="tab-button active" type="button" data-page="today">Today</button>
+      <button class="tab-button" type="button" data-page="calendar">Tick calendar</button>
+      <button class="tab-button" type="button" data-page="syllabus">Syllabus tracker</button>
+      <button class="tab-button" type="button" data-page="strategy">Study strategy</button>
+      <button class="tab-button" type="button" data-page="practice">Practice & doubts</button>
+    </nav>
+
+    <section class="app-page" id="page-today">
+      <div class="dashboard-grid">
+        <article class="panel routine-panel">
+          <div class="panel-head"><div><div class="eyebrow">Suggested · adjust to college hours</div><h2>Daily routine</h2></div><button type="button" class="small-button" id="routine-toggle">Edit times</button></div>
+          <p class="muted">Keep the study blocks steady, and move them around if Dana’s timetable or commute changes.</p>
+          <div id="routine-list" class="routine-list"></div>
+          <details class="routine-editor" id="routine-editor">
+            <summary>Change study block times</summary>
+            <div class="time-edit-grid">
+              <label>Session 1 <span><input type="time" id="routine-focus1-start"><i>to</i><input type="time" id="routine-focus1-end"></span></label>
+              <label>Session 2 <span><input type="time" id="routine-focus2-start"><i>to</i><input type="time" id="routine-focus2-end"></span></label>
+              <label>Light review <span><input type="time" id="routine-light-start"><i>to</i><input type="time" id="routine-light-end"></span></label>
+              <label>Sunday check-in <span><input type="time" id="routine-sunday-start"><i>to</i><input type="time" id="routine-sunday-end"></span></label>
+            </div>
+            <button type="button" class="btn btn-primary" id="save-routine">Save routine</button>
+          </details>
+        </article>
+        <article class="panel focus-panel"><div class="eyebrow">Today’s focus</div><h2 id="today-title">Your next study target</h2><p id="today-detail" class="muted"></p><div id="today-task-list"></div></article>
+        <article class="panel catchup-panel"><div class="eyebrow">Missed portions</div><h2>Catch-up list</h2><p class="muted">A session that missed its 15-minute tick window can be moved here and completed later.</p><div id="catchup-list"></div></article>
+        <article class="panel method-panel"><div class="eyebrow">Study method</div><h2>Learn → recall → practise</h2><p class="muted">Use the first block to learn, the next to solve or write from memory, and the light block to review errors. Keep Sunday short and leave time to rest.</p></article>
+      </div>
+    </section>
+
+    <section class="app-page hidden" id="page-calendar">
+      <div class="section-head"><div><h2>Tick calendar</h2><p>Select a date to see its targets. Ticks open during the chosen study block and stay available for 15 minutes after it ends.</p></div><div class="toolbar"><label for="subject-filter">Show</label><select id="subject-filter" aria-label="Filter by subject"><option value="all">All subjects</option><option value="math">Mathematics</option><option value="economics">Economics</option><option value="physics">Physics</option><option value="history">History</option><option value="english">English</option><option value="malayalam">Malayalam</option><option value="review">Review targets</option></select></div></div>
+      <div class="calendar-layout">
+        <div class="panel calendar-panel"><div class="monthbar"><button class="month-nav" id="month-prev" aria-label="Previous month">‹</button><h2 id="month-title"></h2><button class="month-nav" id="month-next" aria-label="Next month">›</button></div><div class="weekdays"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div><div id="month-grid" class="month-grid"></div><div class="legend">Badges show checked targets; the gold outline marks the selected date.</div></div>
+        <div class="panel selected-panel"><div class="selected-head"><div><div class="eyebrow">Selected date</div><h2 id="selected-date-title"></h2></div><div id="selected-count" class="muted"></div></div><label class="day-type-label" for="day-kind">Day type</label><select id="day-kind" class="day-kind"><option value="campus">Campus day</option><option value="study">Study leave</option><option value="self-study">Self-study day</option><option value="sunday">Sunday / recovery</option></select><p id="selected-routine" class="routine-hint"></p><div id="selected-tasks" class="selected-tasks"></div></div>
+      </div>
+      <div class="phase"><span class="phase-dot"></span><span>Phase 1 · Learn every portion</span><small>15 October – 20 November</small></div><div id="learning-plan"></div>
+      <div class="phase phase-review"><span class="phase-dot"></span><span>Phase 3 · Revise and practise</span><small>21 – 30 November</small></div><div id="revision-plan"></div>
+    </section>
+
+    <section class="app-page hidden" id="page-syllabus">
+      <div class="section-head"><div><h2>Syllabus tracker</h2><p>Tick a module after you can explain it or solve a representative question from memory.</p></div></div>
+      <div class="coverage-grid" id="coverage-grid"></div>
+      <div class="notice"><strong>Physics course assumption:</strong> the uploaded Physics PDF lists multiple Semester I course options. This planner uses <em>Elementary Data Analysis (UK1MDCPHY100, MDC)</em> as a maths-aligned default. Check Dana’s registered course code; change this section if her Physics course is different.</div>
+      <div class="notice"><strong>Economics syllabus:</strong> the supplied page shows modules but no course code. The planner includes the five modules shown in that excerpt.</div>
+      <div class="notice"><strong>Exam timing:</strong> the exact December exam date was not included. The plan completes the syllabus by 20 November and leaves 10 revision days through 30 November.</div>
+    </section>
+
+    <section class="app-page hidden" id="page-strategy">
+      <div class="section-head"><div><h2>Study strategy</h2><p>Three phases designed around the supplied portions and the December exam window.</p></div></div>
+      <div class="strategy-grid">
+        <article class="panel"><span class="phase-number">01</span><h3>Build the base · 15 Oct–2 Nov</h3><p>Work through the foundations in Mathematics, Economics, Physics and English. Start short, regular recall for History and Malayalam.</p></article>
+        <article class="panel"><span class="phase-number">02</span><h3>Finish every module · 3–20 Nov</h3><p>Complete the remaining portions, internal-only Mathematics topics, Economics issues, and Physics spreadsheet activities. Tick a module only when you can retrieve it without notes.</p></article>
+        <article class="panel"><span class="phase-number">03</span><h3>Revise and practise · 21–30 Nov</h3><p>Rotate all six subjects, write timed answers, repeat graphs and calculations, then use the mixed mock and error log on 30 November.</p></article>
+      </div>
+      <div class="panel strategy-note"><h3>Weekly rhythm</h3><p>Use the heavier study blocks for Mathematics, Economics and Physics calculations. Rotate History, English and Malayalam across the second block and the lighter recall block. Keep one short Sunday review, then take the rest of the day off.</p><h3>For each topic</h3><ol><li>Read the prescribed portion and mark unfamiliar terms.</li><li>Close the notes and explain or write the idea from memory.</li><li>Solve a problem, sketch a curve, or draft a short answer.</li><li>Record one mistake and retry it during the next review.</li></ol></div>
+    </section>
+
+    <section class="app-page hidden" id="page-practice">
+      <div class="section-head"><div><h2>Practice and doubt log</h2><p>Use a quick prompt for retrieval practice and save questions to revisit.</p></div></div>
+      <div class="practice-grid">
+        <article class="panel"><div class="eyebrow">Quick practice</div><label class="practice-label" for="practice-subject">Choose a subject</label><select id="practice-subject"><option value="all">Any subject</option><option value="math">Mathematics</option><option value="economics">Economics</option><option value="physics">Physics</option><option value="history">History</option><option value="english">English</option><option value="malayalam">Malayalam</option></select><div id="practice-question" class="question-card"></div><button type="button" class="btn btn-primary" id="new-practice">New prompt</button><button type="button" class="btn btn-secondary" id="show-answer">Show answer guide</button><div id="answer-guide" class="answer-guide hidden"></div></article>
+        <article class="panel"><div class="eyebrow">Doubt tracker</div><h2>Save a question for later</h2><form id="doubt-form"><label>Subject<select id="doubt-subject"><option>Mathematics</option><option>Economics</option><option>Physics</option><option>History</option><option>English</option><option>Malayalam</option></select></label><label>Topic or question<input id="doubt-topic" required placeholder="What needs another explanation?"></label><label>Notes<textarea id="doubt-note" rows="3" placeholder="Add the example or what was confusing"></textarea></label><button class="btn btn-primary" type="submit">Save doubt</button></form><div id="doubt-list" class="doubt-list"></div></article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Progress is saved only in this browser on this device. No account or passcode is used.</span>
+      <span>Built from the supplied University of Kerala FYUGP syllabus portions.</span>
+    </footer>
+  </main>
+
+  <dialog class="shortcut-dialog" id="shortcut-dialog" aria-labelledby="shortcut-title">
+    <h2 id="shortcut-title">Add Dana’s planner to your home screen</h2>
+    <p>Your browser creates shortcuts for security, so this button can open the install prompt when available or show the browser steps.</p>
+    <ul>
+      <li><strong>Android · Chrome:</strong> open the browser menu (⋮), choose <em>Install and create shortcut</em> (or <em>Add to Home screen</em>), then choose <em>Create shortcut</em> and <em>Add</em>.</li>
+      <li><strong>Computer · Chrome:</strong> open the menu, choose <em>Cast, save, and share</em> → <em>Create shortcut</em>.</li>
+      <li><strong>Computer · Edge:</strong> open the menu, choose <em>More tools</em> → <em>Apps</em> → <em>Install this site as an app</em>; then choose a desktop or Start shortcut in the app options.</li>
+    </ul>
+    <p><strong>Using this downloaded HTML file?</strong> Some browsers don’t offer home-screen installation for a local file. If the option is missing, the browser can still bookmark it; a local-file shortcut only works on the device where the file remains saved.</p>
+    <form method="dialog"><button class="btn btn-primary" type="submit">Close</button></form>
+  </dialog>
+
+  <script>
+    (() => {
+      const KEY = 'dana-nijam-semester-1-planner-v1';
+      const subjects = {
+        math: { label: 'Mathematics', code: 'UK1DSCMAT109 · Mathematics for Social Sciences I', type: 'DSC · 4 credits', color: 'var(--math)', modules: [
+          ['I · Matrices', 'Ordered pairs, Cartesian products, relations; functional relations and functions. Textbook Chapter 1 sections listed in the supplied pages.'],
+          ['II · Linear Equations', 'Linear and quadratic equations and identities; solving equations and simultaneous equations.'],
+          ['III · Linear Programming', 'Two-variable LPP, assumptions, feasible and basic feasible solutions, multiple optima, infeasible cases, and graphical solutions.'],
+          ['IV · Functions and Curves', 'Demand functions and curves; total revenue curves and cost curves.'],
+          ['V · Teacher-designed module', 'Internal assessment only: set properties and Venn diagrams for three or more sets; applications of linear equations; degeneracy in LPP; production functions and marginal product curves.']
+        ]},
+        economics: { label: 'Economics', code: 'FYUGP Economics · course code not shown in supplied excerpt', type: 'Economics · syllabus excerpt', color: 'var(--economics)', modules: [
+          ['I · Introduction to Economics', 'Definitions; scarcity and choice; trade-offs, opportunity cost and rationality; assumptions and economic models; circular flow of income; production possibility frontier; positive and normative economics; techniques of economic analysis; micro and macroeconomics; capitalism, socialism, mixed and market economies.'],
+          ['II · Principles of Microeconomics', 'Demand and supply, determinants and shifts, role of prices; equilibrium; types and measurement of elasticity; consumer equilibrium, utility, marginal utility and consumer surplus; production, factors, production function and laws; total, average and marginal revenue; total, variable, fixed, average and marginal costs; short-run and long-run cost curves.'],
+          ['III · Principles of Macroeconomics', 'Output instability, inflation, unemployment, inflation–unemployment relationship, stability and business cycles; macroeconomic variables and national income accounting; GDP by product, income and expenditure methods; personal and disposable income; real versus nominal GDP.'],
+          ['IV · Economic Development and International Trade', 'Meaning of development, growth and obstacles to growth; measuring development with GDP, PCI, HDI, PQLI, GDI and MDPI; absolute and comparative advantage and gains from trade.'],
+          ['V · Analysis of Economic Issues', 'Income inequality and measurement; poverty; unemployment; trade protectionism; climate change; technological disruption; debt; use economic data to assess growth, unemployment, inflation and other measures.']
+        ]},
+        physics: { label: 'Physics', code: 'UK1MDCPHY100 · Elementary Data Analysis', type: 'MDC · 3 credits', color: 'var(--physics)', modules: [
+          ['I · Presentation of Data', 'Qualitative and quantitative data, variables and measurement scales; tables, bar charts, histograms, pie charts, frequency polygons, ogives, bivariate data and scatter diagrams.'],
+          ['II · Probability', 'Experiments, sample spaces and events; classical, statistical and axiomatic probability; conditional probability, addition and multiplication laws, independence, total probability and Bayes’ theorem.'],
+          ['III · Statistical Methods', 'Population and sample; arithmetic, geometric and harmonic means, median, mode; range, quartile and mean deviation, standard deviation, variance, coefficient of variation, skewness and kurtosis.'],
+          ['IV · Introduction to Spreadsheet', 'Cell references, entering/editing/formatting data, formulas, filters, sorting, data analysis, pivot tables, statistical functions and charts.'],
+          ['V · Hands-on Training', 'Complete any five spreadsheet activities from the syllabus, such as summary measures, standard deviation, sorting, charts, Ohm’s law or rainfall analysis.']
+        ]},
+        history: { label: 'History', code: 'UK1DSCHIS103 · History of Human Rights Movements', type: 'DSC · 4 credits', color: 'var(--history)', modules: [
+          ['I · Foundations of Human Rights', 'Definitions and approaches; declarations of 1789 and 1791; UDHR, ICCPR and ICESCR; first, second and third generations of rights.'],
+          ['II · Anti-Slavery Movements', 'Slavery, William Wilberforce, the American Civil War and Jim Crow; abolition, Lincoln–Douglas debates, Emancipation Proclamation and slavery conventions.'],
+          ['III · Movements against Racial Discrimination', 'Race, discrimination and apartheid; Gandhi in South Africa and the listed laws; Martin Luther King, Rosa Parks, Nelson Mandela and Desmond Tutu.'],
+          ['IV · Human Rights Movements in India', 'Dalit, peasant, tribal and women’s movements; environmental movements, including Narmada Bachao Andolan.'],
+          ['V · Legal Rights and Safeguards in India', 'Fundamental Rights and DPSP; NHRC and SHRC; Amnesty International, Human Rights Watch, PUCL and PUDR; rights of women, children, Dalits and transgender people.']
+        ]},
+        english: { label: 'English', code: 'UK1AECENG106 · English for Social Sciences I', type: 'AEC · 3 credits', color: 'var(--english)', modules: [
+          ['I · Language Dilemma', 'English sounds, vowels and consonants, pronunciation, listening, vocabulary, the prescribed poem/audio, and the mother-tongue influence article.'],
+          ['II · The Magic of Speeches', 'Speaking skills, barriers and purposes; study the listed speeches/TED talk; listening, a short personal-philosophy talk, comprehension and a speech script.'],
+          ['III · Reading Lives', 'Types of reading, effective reading and barriers; prescribed poem and prose; podcast, audio conversion, comparative reading and reviews.'],
+          ['IV · Writing Nature', 'Writing for different purposes; prescribed poem and Pale Blue Dot article; environment vocabulary, listening and a climate-change essay.'],
+          ['V · The Leap Across', 'Inequality and human rights readings; AI and digital rights; film appreciation, discussion and a short social-issues article.']
+        ]},
+        malayalam: { label: 'Malayalam', code: 'UK1AECMAL107 · കഥാലോകം (Kathalokam)', type: 'AEC · 3 credits', color: 'var(--malayalam)', modules: [
+          ['I · ആദികാലം · Early period', 'Print and early publications, short story as a literary form, early Malayalam stories and writers; close study of വാസനാവികൃതി and മനം പോലെ മംഗല്യം.'],
+          ['II · നവോത്ഥാനകാലം · Renaissance period', 'Social and literary renaissance, prose, Western education, realism, humanism and progressive thought; study the three prescribed stories in the syllabus.'],
+          ['III · നവോത്ഥാനാനന്തരകാലം · After the renaissance', 'Modern and postmodern ideas, changes in language and imagination, individualism, environment, women’s and subaltern perspectives, and the five prescribed stories.'],
+          ['IV · പ്രായോഗികപരിശീലനം · Practical work', 'Collect and analyse socially relevant stories; practise criticism and story review; stage or illustrate a story, interview a writer, and try digital publication/recording.']
+        ]}
+      };
+
+      const coreTasks = {
+        math: [
+          ['Ordered pairs, Cartesian products and relations', 'Work examples from the Module I relation topics.'],
+          ['Functional relations and functions', 'Classify relations and practise the function questions.'],
+          ['Linear and quadratic equations; identities', 'Review the forms and solve a short mixed set.'],
+          ['Solve quadratic and simultaneous equations', 'Show each step and check answers by substitution.'],
+          ['LPP introduction and assumptions', 'Translate a short word problem into a two-variable model.'],
+          ['Feasible and basic feasible solutions', 'Graph constraints and identify feasible corner points.'],
+          ['Multiple optima and no-feasible-solution cases', 'Explain each case from a graph; include the internal LPP degeneracy note.'],
+          ['Graphical solution practice', 'Solve two complete two-variable LPP questions.'],
+          ['Demand functions and demand curves', 'Sketch and label the relationships in the Module IV appendix.'],
+          ['Total revenue and cost curves', 'Draw, label and compare the curves using examples.'],
+          ['Internal topic: sets and Venn diagrams', 'Practise set properties and a three-set Venn application.'],
+          ['Internal topic: applications of linear equations', 'Write and solve short applied problems.'],
+          ['Internal topic: production functions', 'Connect production and marginal product curves.'],
+          ['Internal topic: marginal product and LPP degeneracy', 'Make a one-page note and solve a quick example of each.'],
+          ['Mathematics mixed timed practice', 'Answer one question from each module and log errors.']
+        ],
+        economics: [
+          ['Economics: definitions, scarcity and choice', 'Explain scarcity, choice, trade-offs, opportunity cost and rationality with everyday examples.'],
+          ['Economics: assumptions, models and circular flow', 'Draw the circular flow model and state the assumptions behind a simple economic model.'],
+          ['Economics: PPF and economic analysis', 'Sketch a production possibility frontier; distinguish positive from normative statements and list analysis tools.'],
+          ['Economics: micro, macro and economic systems', 'Compare microeconomics and macroeconomics; distinguish capitalist, socialist, mixed and market economies.'],
+          ['Economics: demand, supply and price allocation', 'List determinants, show curve shifts and explain how prices allocate resources.'],
+          ['Economics: equilibrium and elasticity', 'Find market equilibrium and practise elasticity types and basic measurement.'],
+          ['Economics: utility and consumer equilibrium', 'Connect utility, marginal utility, consumer equilibrium and consumer surplus.'],
+          ['Economics: production and production laws', 'Review factors of production, production functions and the laws included in the course.'],
+          ['Economics: total, average and marginal revenue', 'Calculate TR, AR and MR from a small schedule and sketch the curves.'],
+          ['Economics: cost concepts', 'Separate total, variable, fixed, average and marginal costs with examples.'],
+          ['Economics: short-run cost curves', 'Draw and label the short-run cost curves; explain their basic relationships.'],
+          ['Economics: long-run cost curves', 'Sketch long-run cost curves and compare long-run with short-run costs.'],
+          ['Economics: macroeconomic issues and cycles', 'Review output instability, inflation, unemployment, their relationship, stability and basic business-cycle concepts.'],
+          ['Economics: macro variables and national income accounting', 'Name key macroeconomic variables and organise a national-income accounting outline.'],
+          ['Economics: GDP measurement', 'Compare product, income and expenditure approaches to measuring GDP.'],
+          ['Economics: personal income and price-adjusted GDP', 'Distinguish personal and disposable income, and real and nominal GDP.'],
+          ['Economics: development, growth and indicators', 'Explain development, growth and obstacles; revise GDP, PCI, HDI, PQLI, GDI and MDPI.'],
+          ['Economics: trade and comparative advantage', 'Work a small absolute/comparative advantage example and explain gains from trade.'],
+          ['Economics: inequality, poverty and unemployment', 'Review inequality measurement, poverty and unemployment using definitions and examples.'],
+          ['Economics: current issues and economic data', 'Outline protectionism, climate change, technological disruption and debt; interpret a small growth, inflation or employment data set.']
+        ],
+        physics: [
+          ['Data types, variables and measurement scales', 'Sort examples as qualitative/quantitative and nominal/ordinal/interval/ratio.'],
+          ['Tables, bar diagrams and pie charts', 'Create a clean table and two suitable displays from a small data set.'],
+          ['Histograms, frequency polygons and ogives', 'Build a frequency distribution and sketch its displays.'],
+          ['Bivariate data and scatter diagrams', 'Plot points and describe the direction of association.'],
+          ['Random experiments, sample spaces and events', 'Write sample spaces and use event notation.'],
+          ['Classical, statistical and axiomatic probability', 'Compare the definitions and solve basic questions.'],
+          ['Conditional probability and probability laws', 'Practise conditional, addition and multiplication questions.'],
+          ['Independent events, total probability and Bayes', 'Solve one worked example of each theorem.'],
+          ['Statistical population, sample and scope', 'Identify population, sample and variable in examples.'],
+          ['Arithmetic mean, median and mode', 'Calculate and compare the measures for a small data set.'],
+          ['Geometric and harmonic means; basic dispersion', 'Practise these means plus range, quartile deviation and mean deviation.'],
+          ['Standard deviation, variance and shape measures', 'Review RMS deviation, coefficient of variation, skewness and kurtosis.'],
+          ['Spreadsheet cells, entry, formatting and editing', 'Set up a sheet and enter/format a small data table.'],
+          ['Formulas, filters, sorting and pivot tables', 'Use references and formulas, then sort/filter and summarise data.'],
+          ['Statistical functions and charts', 'Create pie, column and line charts from data.'],
+          ['Hands-on training: choose any five activities', 'Complete five syllabus activities; save screenshots or handwritten working as evidence.'],
+          ['Physics data-analysis mixed practice', 'Interpret a graph, solve a Bayes question and calculate standard deviation.']
+        ],
+        history: [
+          ['Human rights: definition and approaches', 'Make a comparison chart of the approaches to studying rights.'],
+          ['Declarations of 1789 and 1791', 'Compare the Declaration of the Rights of Man and of the Woman and Female Citizen.'],
+          ['UDHR, ICCPR, ICESCR and generations of rights', 'Build a timeline and sort examples into the three generations.'],
+          ['Slavery, Wilberforce, Civil War and Jim Crow', 'Prepare a short cause-and-context outline.'],
+          ['Abolition, Lincoln–Douglas and emancipation', 'Review the debates, proclamation, conventions and significance.'],
+          ['Race, discrimination, apartheid and Gandhi in South Africa', 'Learn the listed laws and Gandhi’s human-rights ideas.'],
+          ['King, Rosa Parks, Mandela and Tutu', 'Create brief profiles and compare movement strategies.'],
+          ['Indian Dalit, peasant, tribal and women’s movements', 'Make a movement-to-issue revision table.'],
+          ['Environmental movements and Narmada Bachao Andolan', 'Prepare a case-study answer with context and outcomes.'],
+          ['Constitutional safeguards and commissions', 'Review Fundamental Rights, DPSP, NHRC and SHRC.'],
+          ['NGOs and rights of vulnerable groups', 'Revise the named NGOs and protections for women, children, Dalits and trans people.']
+        ],
+        english: [
+          ['English sound system: vowels, consonants and pronunciation', 'Practise listening for key sounds and common pronunciation differences.'],
+          ['Language Dilemma practicum', 'Review the prescribed poem/audio, build vocabulary and outline the mother-tongue article.'],
+          ['Speaking skills, barriers and purposes', 'Analyse one listed speech and note effective speaking choices.'],
+          ['Speech practicum', 'Deliver a three-minute talk; practise comprehension and draft a student-representative speech.'],
+          ['Reading skills and barriers', 'Compare reading methods and identify the central idea in a short text.'],
+          ['Reading Lives practicum', 'Read the prescribed poem and prose; make a short comparative review.'],
+          ['Writing skills and the Module IV readings', 'Review forms and purpose; annotate “Let them not say” and “A Pale Blue Dot”.'],
+          ['Environment writing and listening', 'Collect climate vocabulary and draft a climate-change essay.'],
+          ['Inequality and human-rights arguments', 'Read the Module V material and outline a supported argument.'],
+          ['AI, digital rights and film discussion', 'Prepare discussion points for the listed readings and A Beautiful Mind.'],
+          ['Language accuracy and timed writing', 'Practise punctuation, subject–verb agreement, parts of speech, articles and conjunctions.']
+        ],
+        malayalam: [
+          ['Early Malayalam short story and publication context', 'Review print history, early writers and the short story form.'],
+          ['Close reading: വാസനാവികൃതി', 'Annotate the story and draft a short-answer outline.'],
+          ['Close reading: മനം പോലെ മംഗല്യം', 'Review character, theme and narrative; compare with the first story.'],
+          ['Renaissance society and literary change', 'Revise prose development, Western education, realism, humanism and progressive thought.'],
+          ['Three prescribed Renaissance stories', 'Read ഐഷുക്കുട്ടി, പെൺബുദ്ധി and മാലപ്പടക്കം; make one theme card per story.'],
+          ['After the renaissance: modern and postmodern ideas', 'Track changes in language, imagination, individualism and social awareness.'],
+          ['Five prescribed later-period stories', 'Read the syllabus selections and note each author, context and main theme.'],
+          ['Practical: collect and analyse stories', 'Choose socially relevant stories and write a concise analysis.'],
+          ['Practical: criticism, staging and interview', 'Draft a review and plan a story presentation or writer interview.'],
+          ['Practical portfolio and module recap', 'Organise recording/digital publication work and revise all four modules.']
+        ]
+      };
+
+      const coreList = [];
+      const order = ['math', 'economics', 'physics', 'history', 'english', 'malayalam'];
+      const indexes = Object.fromEntries(order.map(key => [key, 0]));
+      while (order.some(key => indexes[key] < coreTasks[key].length)) {
+        for (const key of order) {
+          if (indexes[key] < coreTasks[key].length) {
+            const [title, detail] = coreTasks[key][indexes[key]++];
+            coreList.push({ course: key, title, detail, duration: '45 min' });
+          }
+        }
+      }
+
+      const revisionDays = [
+        { date: '2026-11-21', tasks: [
+          ['math', 'Maths problem set', 'Timed questions from relations, equations and graphical LPP.', '60 min'],
+          ['physics', 'Physics data quiz', 'One presentation question, one probability question and one statistics calculation.', '45 min'],
+          ['economics', 'Economics micro quick test', 'Answer one demand/equilibrium question and one cost or revenue question.', '30 min']
+        ]},
+        { date: '2026-11-22', tasks: [
+          ['review', 'Light weekly recall', 'Close the notes, list weak points and choose the next three items to revisit.', '30 min']
+        ]},
+        { date: '2026-11-23', tasks: [
+          ['history', 'History Modules I–II', 'Rebuild the timeline from declarations through abolition without notes.', '45 min'],
+          ['english', 'English speaking and listening', 'Practise pronunciation, comprehension and the short speech aloud.', '40 min']
+        ]},
+        { date: '2026-11-24', tasks: [
+          ['malayalam', 'Malayalam Modules I–II', 'Write two short answers on early stories and the renaissance selections.', '50 min'],
+          ['math', 'Maths LPP and curves', 'Solve a graph problem and sketch demand, revenue and cost curves.', '50 min'],
+          ['economics', 'Economics micro diagrams', 'Draw demand/supply shifts, equilibrium and short-run cost curves from memory.', '30 min']
+        ]},
+        { date: '2026-11-25', tasks: [
+          ['physics', 'Probability practice', 'Work conditional probability, independence, total probability and Bayes questions.', '50 min'],
+          ['english', 'English reading and writing', 'Write a short reading review and one climate or social-issues paragraph.', '45 min']
+        ]},
+        { date: '2026-11-26', tasks: [
+          ['history', 'History Module III', 'Recall Gandhi, apartheid, King, Parks, Mandela and Tutu; answer one essay question.', '50 min'],
+          ['malayalam', 'Malayalam Module III', 'Compare themes and social context across the prescribed later-period stories.', '50 min']
+        ]},
+        { date: '2026-11-27', tasks: [
+          ['math', 'Maths Modules IV–V', 'Practise the curves and the internal-assessment Venn, production and LPP topics.', '50 min'],
+          ['physics', 'Spreadsheet practical', 'Complete or repeat one spreadsheet activity and explain the formulas used.', '45 min']
+        ]},
+        { date: '2026-11-28', tasks: [
+          ['history', 'History Modules IV–V', 'Write short notes on Indian movements, safeguards, commissions and NGOs.', '50 min'],
+          ['english', 'English Modules IV–V', 'Plan an essay on climate, inequality, human rights or AI using evidence.', '45 min'],
+          ['economics', 'Economics macro and development', 'Recall GDP methods, development measures, comparative advantage and gains from trade.', '30 min']
+        ]},
+        { date: '2026-11-29', tasks: [
+          ['malayalam', 'Malayalam practical recap', 'Check the story review, analysis and presentation/recording work.', '30 min']
+        ]},
+        { date: '2026-11-30', tasks: [
+          ['review', 'Mixed Semester I mock', 'Attempt a short mixed paper across all six subjects, then log the topics to revisit.', '60 min'],
+          ['economics', 'Economics final recall', 'Explain the five modules aloud; check formulas, diagrams and key measures.', '30 min'],
+          ['review', 'Final error log', 'Review only mistakes and memorise key dates, formulas, terms and story themes.', '30 min']
+        ]}
+      ];
+
+      const firstStart = new Date(2026, 9, 15);
+      const firstEnd = new Date(2026, 10, 20);
+      const learningDays = [];
+      const sundayNotes = [
+        'Weekly check-in: recall this week’s key ideas without notes, then choose one small catch-up item.',
+        'Weekly check-in: make a one-page memory sheet and note anything still unclear.',
+        'Weekly check-in: explain three topics aloud and mark two for another pass.',
+        'Weekly check-in: do a short self-quiz, tidy the notes, then rest.',
+        'Weekly check-in: list any unclear portions before the final learning week.'
+      ];
+      const totalStudyDays = 32;
+      const extraStudySlots = Math.max(0, coreList.length - totalStudyDays * 2);
+      let cursor = 0;
+      let studyIndex = 0;
+      let sundayIndex = 0;
+      for (let date = new Date(firstStart); date <= firstEnd; date.setDate(date.getDate() + 1)) {
+        const iso = toISO(date);
+        if (date.getDay() === 0) {
+          learningDays.push({ date: iso, phase: 'learn', tasks: [{
+            course: 'review', title: sundayNotes[sundayIndex++], detail: 'Keep this to a light 30-minute check-in and protect the rest of the day.', duration: '30 min', slot: 'sunday', key: `learn-${iso}-0`
+          }] });
+        } else {
+          const hasLightSlot = Math.floor((studyIndex + 1) * extraStudySlots / totalStudyDays) > Math.floor(studyIndex * extraStudySlots / totalStudyDays);
+          const slotNames = hasLightSlot ? ['focus1', 'focus2', 'light'] : ['focus1', 'focus2'];
+          const tasks = [];
+          for (const [index, slot] of slotNames.entries()) {
+            const task = coreList[cursor++];
+            if (task) tasks.push({ ...task, slot, duration: slot === 'light' ? '30 min' : '60 min', key: `learn-${iso}-${index}` });
+          }
+          learningDays.push({ date: iso, phase: 'learn', tasks });
+          studyIndex++;
+        }
+      }
+
+      const revisionSchedule = revisionDays.map(day => ({
+        date: day.date,
+        phase: 'revise',
+        tasks: day.tasks.map(([course, title, detail, duration], index) => ({
+          course, title, detail, duration,
+          slot: parseISO(day.date).getDay() === 0 ? 'sunday' : ['focus1', 'focus2', 'light'][index] || 'light',
+          key: `revise-${day.date}-${index}`
+        }))
+      }));
+      const allDays = [...learningDays, ...revisionSchedule];
+      const allTasks = allDays.flatMap(day => day.tasks.map(task => ({ ...task, date: day.date })));
+      const taskByKey = new Map(allTasks.map(task => [task.key, task]));
+      const totalDailyTasks = allTasks.length;
+      const defaultRoutine = {
+        focus1: { start: '06:30', end: '07:30' },
+        focus2: { start: '17:45', end: '18:45' },
+        light: { start: '20:45', end: '21:15' },
+        sunday: { start: '10:00', end: '10:30' }
+      };
+      let state = { done: {}, modules: {}, routine: defaultRoutine, dayTypes: {}, catchup: {}, doubts: [] };
+      try {
+        const saved = localStorage.getItem(KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          state = {
+            ...state,
+            ...parsed,
+            routine: { ...defaultRoutine, ...(parsed.routine || {}) },
+            done: parsed.done || {},
+            modules: parsed.modules || {},
+            dayTypes: parsed.dayTypes || {},
+            catchup: parsed.catchup || {},
+            doubts: Array.isArray(parsed.doubts) ? parsed.doubts : []
+          };
+        }
+      } catch (error) { /* The planner remains usable if browser storage is unavailable. */ }
+
+      function toISO(date) {
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+      }
+      function parseISO(iso) { return new Date(`${iso}T00:00:00`); }
+      function dateLabel(iso) {
+        return new Intl.DateTimeFormat('en-IN', { weekday: 'short', day: 'numeric', month: 'short' }).format(parseISO(iso));
+      }
+      function dayLabel(iso) {
+        return new Intl.DateTimeFormat('en-IN', { weekday: 'long' }).format(parseISO(iso));
+      }
+      function escapeHTML(value) {
+        return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+      }
+      function save() {
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (error) { /* Keep current-page progress even if storage is blocked. */ }
+      }
+      function formatTime(value) {
+        const [hour, minute] = (value || '00:00').split(':').map(Number);
+        return new Intl.DateTimeFormat('en-IN', { hour: 'numeric', minute: '2-digit' }).format(new Date(2026, 0, 1, hour, minute));
+      }
+      function minutes(value) {
+        const [hour, minute] = (value || '00:00').split(':').map(Number);
+        return hour * 60 + minute;
+      }
+      function getRoutine(slot) { return state.routine[slot] || defaultRoutine.focus1; }
+      function getAvailability(task, date) {
+        if (state.done[task.key] || state.catchup[task.key]) return { open: true, text: state.done[task.key] ? 'Completed' : 'Catch-up · open anytime' };
+        const today = toISO(new Date());
+        if (date > today) return { open: false, text: `Opens ${dateLabel(date)} · ${formatTime(getRoutine(task.slot).start)}`, upcoming: true };
+        if (date < today) return { open: false, text: 'Missed window · move to catch-up', missed: true };
+        const schedule = getRoutine(task.slot);
+        const now = new Date();
+        const current = now.getHours() * 60 + now.getMinutes();
+        const start = minutes(schedule.start);
+        const close = minutes(schedule.end) + 15;
+        if (current < start) return { open: false, text: `Opens ${formatTime(schedule.start)}`, upcoming: true };
+        if (current <= close) return { open: true, text: `Open until ${formatTime(`${String(Math.floor(close / 60) % 24).padStart(2, '0')}:${String(close % 60).padStart(2, '0')}`)}` };
+        return { open: false, text: 'Missed window · move to catch-up', missed: true };
+      }
+      function renderTask(task, date) {
+        const done = !!state.done[task.key];
+        const course = subjects[task.course]?.label || 'Review';
+        const availability = getAvailability(task, date);
+        const disabled = !done && !availability.open;
+        const moveButton = availability.missed && !done ? `<button type="button" class="catchup-button" data-catchup="${escapeHTML(task.key)}">Add to catch-up</button>` : '';
+        return `<div class="task-row ${done ? 'is-done' : ''}" data-course="${escapeHTML(task.course)}" data-date="${escapeHTML(date)}">
+          <input type="checkbox" data-task="${escapeHTML(task.key)}" ${done ? 'checked' : ''} ${disabled ? 'disabled' : ''} aria-label="Mark ${escapeHTML(task.title)} complete">
+          <span class="task-text"><strong>${escapeHTML(course)}</strong>${escapeHTML(task.title)}<span class="duration">${escapeHTML(task.duration || '45 min')} · ${escapeHTML(task.detail || '')}</span><span class="task-status">${escapeHTML(availability.text)}</span></span>
+          ${moveButton}
+        </div>`;
+      }
+      function groupByWeek(days) {
+        const groups = [];
+        for (let i = 0; i < days.length; i += 7) groups.push(days.slice(i, i + 7));
+        return groups;
+      }
+      function renderDay(day, label) {
+        const today = toISO(new Date());
+        const completed = day.tasks.length > 0 && day.tasks.every(task => !!state.done[task.key]);
+        const isLight = day.tasks.length === 1 && (day.tasks[0].course === 'review' || day.tasks[0].slot === 'sunday');
+        const rows = day.tasks.map(task => renderTask(task, day.date)).join('');
+        return `<article class="day-card ${day.date === today ? 'is-today' : ''} ${completed ? 'is-complete' : ''} ${isLight ? 'light-day' : ''}" data-date="${day.date}">
+          <div class="day-top"><div class="day-date">${dateLabel(day.date)}<span class="day-weekday">${dayLabel(day.date)}</span></div>${day.date === today ? '<span class="today-tag">TODAY</span>' : ''}</div>
+          ${rows || '<div class="empty">No target</div>'}
+        </article>`;
+      }
+      function renderWeeks(days, target, label) {
+        target.innerHTML = groupByWeek(days).map((week, index) => {
+          const range = `${dateLabel(week[0].date)} – ${dateLabel(week[week.length - 1].date)}`;
+          return `<section class="week"><div class="week-title"><strong>${label} ${index + 1}</strong><span>${range}</span></div><div class="day-grid">${week.map(day => renderDay(day, label)).join('')}</div></section>`;
+        }).join('');
+      }
+      function renderCoverage() {
+        const grid = document.getElementById('coverage-grid');
+        const moduleTotal = Object.values(subjects).reduce((sum, subject) => sum + subject.modules.length, 0);
+        document.getElementById('coverage-count').textContent = `${Object.keys(state.modules).filter(key => state.modules[key]).length} / ${moduleTotal}`;
+        grid.innerHTML = Object.entries(subjects).map(([key, subject]) => `<details class="syllabus-card" data-subject="${key}" style="--course-color:${subject.color}" open>
+          <summary><span><span class="course-title">${subject.label}</span><span class="course-code">${subject.code}</span></span><span class="course-type">${subject.type}</span></summary>
+          <div class="module-list">${subject.modules.map(([title, detail], index) => {
+            const id = `${key}-module-${index}`;
+            return `<label class="module"><input type="checkbox" data-module="${id}" ${state.modules[id] ? 'checked' : ''}><span><strong>${title}</strong><span>${detail}</span></span></label>`;
+          }).join('')}</div>
+        </details>`).join('');
+      }
+      function updateProgress() {
+        const completed = allTasks.filter(task => !!state.done[task.key]).length;
+        const percent = totalDailyTasks ? Math.round(completed * 100 / totalDailyTasks) : 0;
+        document.getElementById('progress-count').textContent = `${percent}%`;
+        document.getElementById('progress-caption').textContent = `${completed} of ${totalDailyTasks} study and revision targets checked`;
+        document.getElementById('progress-fill').style.width = `${percent}%`;
+        document.querySelector('.progress-track').setAttribute('aria-valuenow', String(percent));
+        const moduleTotal = Object.values(subjects).reduce((sum, subject) => sum + subject.modules.length, 0);
+        document.getElementById('coverage-count').textContent = `${Object.keys(state.modules).filter(key => state.modules[key]).length} / ${moduleTotal}`;
+      }
+      function applyFilter() {
+        const filter = document.getElementById('subject-filter').value;
+        document.querySelectorAll('.task-row').forEach(row => { row.hidden = filter !== 'all' && row.dataset.course !== filter; });
+        document.querySelectorAll('.day-card').forEach(day => {
+          const visibleRows = [...day.querySelectorAll('.task-row')].some(row => !row.hidden);
+          day.hidden = filter !== 'all' && !visibleRows;
+        });
+        document.querySelectorAll('.week').forEach(week => {
+          week.hidden = filter !== 'all' && [...week.querySelectorAll('.day-card')].every(day => day.hidden);
+        });
+        document.querySelectorAll('.syllabus-card').forEach(card => { card.hidden = filter !== 'all' && card.dataset.subject !== filter; });
+      }
+      function selectedDayKind() {
+        if (state.dayTypes[selectedDate]) return state.dayTypes[selectedDate];
+        return parseISO(selectedDate).getDay() === 0 ? 'sunday' : 'campus';
+      }
+      function routineDescription(kind) {
+        const schedule = state.routine;
+        const blocks = `${formatTime(schedule.focus1.start)}–${formatTime(schedule.focus1.end)} and ${formatTime(schedule.focus2.start)}–${formatTime(schedule.focus2.end)}`;
+        if (kind === 'study') return `Study-leave day: take breakfast and short breaks, then use the main study blocks at ${blocks}; finish with the light review.`;
+        if (kind === 'self-study') return `Self-study day: start with a brief morning recall, use the main blocks at ${blocks}, and keep the final review light.`;
+        if (kind === 'sunday') return `Sunday/recovery: one easy check-in at ${formatTime(schedule.sunday.start)} for 30 minutes, then keep the day free for rest.`;
+        return `Campus day: college is 9:30 AM–4:30 PM. Use the morning block before college and the evening blocks after a commute/rest break; adjust the times if needed.`;
+      }
+      function renderRoutine() {
+        const routine = state.routine;
+        const sunday = selectedDayKind() === 'sunday';
+        document.getElementById('routine-list').innerHTML = sunday ? `
+          <div class="routine-item"><time>Wake · 5–6 AM</time><span>Freshen up, breakfast and an easy start</span></div>
+          <div class="routine-item"><time>${formatTime(routine.sunday.start)}–${formatTime(routine.sunday.end)}</time><span>Sunday recall check-in · then rest</span></div>
+          <div class="routine-item"><time>11:00 PM</time><span>Sleep</span></div>
+        ` : `
+          <div class="routine-item"><time>5–6 AM</time><span>Wake up, freshen up and have breakfast</span></div>
+          <div class="routine-item"><time>${formatTime(routine.focus1.start)}–${formatTime(routine.focus1.end)}</time><span>Session 1 · learn the main concept or module</span></div>
+          <div class="routine-item"><time>7:30–9:30 AM</time><span>Get ready and commute · adjust this buffer to her travel time</span></div>
+          <div class="routine-item"><time>9:30 AM–4:30 PM</time><span>College, with lunch and short breaks</span></div>
+          <div class="routine-item"><time>4:30–5:45 PM</time><span>Commute home, snack and rest</span></div>
+          <div class="routine-item"><time>${formatTime(routine.focus2.start)}–${formatTime(routine.focus2.end)}</time><span>Session 2 · solve, write or recall without notes</span></div>
+          <div class="routine-item"><time>After 6:45 PM</time><span>Dinner, home time and a proper break</span></div>
+          <div class="routine-item"><time>${formatTime(routine.light.start)}–${formatTime(routine.light.end)}</time><span>Light review · flashcards, formulas or error log</span></div>
+          <div class="routine-item"><time>9:15–11:00 PM</time><span>Wind down and sleep at 11:00 PM</span></div>
+        `;
+        for (const slot of Object.keys(defaultRoutine)) {
+          document.getElementById(`routine-${slot}-start`).value = routine[slot].start;
+          document.getElementById(`routine-${slot}-end`).value = routine[slot].end;
+        }
+      }
+      function renderToday() {
+        const today = toISO(new Date());
+        let day = allDays.find(item => item.date === today);
+        if (!day) day = allDays.find(item => item.date > today) || allDays[allDays.length - 1];
+        if (!day) return;
+        document.getElementById('today-title').textContent = day.date === today ? 'Today’s study targets' : `Next plan · ${dateLabel(day.date)}`;
+        document.getElementById('today-detail').textContent = day.date === today ? `${dayLabel(day.date)} · ${day.tasks.length} planned target${day.tasks.length === 1 ? '' : 's'}` : `The next scheduled day has ${day.tasks.length} target${day.tasks.length === 1 ? '' : 's'}.`;
+        document.getElementById('today-task-list').innerHTML = day.tasks.map(task => renderTask(task, day.date)).join('');
+        const catchups = Object.keys(state.catchup).filter(key => state.catchup[key] && taskByKey.has(key));
+        const catchupTarget = document.getElementById('catchup-list');
+        catchupTarget.innerHTML = catchups.length ? catchups.map(key => {
+          const task = taskByKey.get(key);
+          return `<div class="catchup-item">${renderTask(task, task.date)}<button class="small-button" type="button" data-remove-catchup="${escapeHTML(key)}">Remove from catch-up</button></div>`;
+        }).join('') : '<div class="empty">No missed portions saved. Move a closed target here when you need another attempt.</div>';
+      }
+      function renderSelectedDate() {
+        const day = allDays.find(item => item.date === selectedDate);
+        document.getElementById('selected-date-title').textContent = `${dateLabel(selectedDate)} · ${dayLabel(selectedDate)}`;
+        const kind = selectedDayKind();
+        document.getElementById('day-kind').value = kind;
+        document.getElementById('selected-routine').textContent = routineDescription(kind);
+        const target = document.getElementById('selected-tasks');
+        if (!day) {
+          target.innerHTML = '<div class="empty">No study target is scheduled for this date.</div>';
+          document.getElementById('selected-count').textContent = 'No targets';
+          return;
+        }
+        const completed = day.tasks.filter(task => state.done[task.key]).length;
+        document.getElementById('selected-count').textContent = `${completed} / ${day.tasks.length} complete`;
+        target.innerHTML = day.tasks.map(task => renderTask(task, day.date)).join('');
+      }
+      function renderMonth() {
+        const title = new Intl.DateTimeFormat('en-IN', { month: 'long', year: 'numeric' }).format(monthView);
+        document.getElementById('month-title').textContent = title;
+        const year = monthView.getFullYear();
+        const month = monthView.getMonth();
+        const first = new Date(year, month, 1);
+        const offset = (first.getDay() + 6) % 7;
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const grid = document.getElementById('month-grid');
+        const cells = Array.from({ length: offset }, () => '<span class="month-day blank"></span>');
+        for (let dayNumber = 1; dayNumber <= daysInMonth; dayNumber++) {
+          const date = toISO(new Date(year, month, dayNumber));
+          const plan = allDays.find(item => item.date === date);
+          const completeCount = plan ? plan.tasks.filter(task => state.done[task.key]).length : 0;
+          const badge = plan ? `<span class="month-badge">${completeCount}/${plan.tasks.length}</span>` : '';
+          cells.push(`<button type="button" class="month-day ${plan ? 'has-plan' : ''} ${date === selectedDate ? 'selected' : ''} ${date === toISO(new Date()) ? 'is-today' : ''}" data-select-date="${date}" aria-label="${dateLabel(date)}${plan ? `, ${completeCount} of ${plan.tasks.length} checked` : ', no target scheduled'}"><span>${dayNumber}</span>${badge}</button>`);
+        }
+        grid.innerHTML = cells.join('');
+      }
+      function renderDoubts() {
+        const target = document.getElementById('doubt-list');
+        target.innerHTML = state.doubts.length ? state.doubts.map(item => `
+          <article class="doubt-item ${item.solved ? 'is-solved' : ''}">
+            <div><span class="doubt-subject">${escapeHTML(item.subject)}</span><span class="doubt-date">${escapeHTML(item.date || '')}</span></div>
+            <strong>${escapeHTML(item.topic)}</strong>${item.note ? `<p>${escapeHTML(item.note)}</p>` : ''}
+            <div class="doubt-actions"><button type="button" class="small-button" data-doubt-action="toggle" data-doubt-id="${escapeHTML(item.id)}">${item.solved ? 'Reopen' : 'Mark solved'}</button><button type="button" class="small-button" data-doubt-action="delete" data-doubt-id="${escapeHTML(item.id)}">Delete</button></div>
+          </article>`).join('') : '<div class="empty">Your saved doubts will appear here.</div>';
+      }
+      function setPage(page) {
+        document.querySelectorAll('.app-page').forEach(section => { section.classList.toggle('hidden', section.id !== `page-${page}`); });
+        document.querySelectorAll('.tab-button').forEach(button => {
+          const active = button.dataset.page === page;
+          button.classList.toggle('active', active);
+          button.setAttribute('aria-current', active ? 'page' : 'false');
+        });
+      }
+      function refreshViews() {
+        renderWeeks(learningDays, document.getElementById('learning-plan'), 'Learning week');
+        renderWeeks(revisionSchedule, document.getElementById('revision-plan'), 'Revision week');
+        renderCoverage();
+        renderRoutine();
+        renderToday();
+        renderSelectedDate();
+        renderMonth();
+        renderDoubts();
+        updateProgress();
+        applyFilter();
+      }
+
+      const todayISO = toISO(new Date());
+      const planStart = learningDays[0].date;
+      const planEnd = revisionSchedule[revisionSchedule.length - 1].date;
+      let selectedDate = todayISO < planStart ? planStart : todayISO > planEnd ? planEnd : todayISO;
+      let monthView = new Date(parseISO(selectedDate).getFullYear(), parseISO(selectedDate).getMonth(), 1);
+      refreshViews();
+      setPage('today');
+
+      document.addEventListener('click', event => {
+        const tab = event.target.closest('[data-page]');
+        if (tab) setPage(tab.dataset.page);
+        const dateButton = event.target.closest('[data-select-date]');
+        if (dateButton) {
+          selectedDate = dateButton.dataset.selectDate;
+          renderSelectedDate();
+          renderMonth();
+          renderRoutine();
+        }
+        const catchupButton = event.target.closest('[data-catchup]');
+        if (catchupButton) {
+          state.catchup[catchupButton.dataset.catchup] = true;
+          save();
+          refreshViews();
+        }
+        const removeCatchup = event.target.closest('[data-remove-catchup]');
+        if (removeCatchup) {
+          delete state.catchup[removeCatchup.dataset.removeCatchup];
+          save();
+          refreshViews();
+        }
+        const doubtButton = event.target.closest('[data-doubt-action]');
+        if (doubtButton) {
+          const id = String(doubtButton.dataset.doubtId);
+          if (doubtButton.dataset.doubtAction === 'delete') state.doubts = state.doubts.filter(item => String(item.id) !== id);
+          else state.doubts = state.doubts.map(item => String(item.id) === id ? { ...item, solved: !item.solved } : item);
+          save();
+          renderDoubts();
+        }
+      });
+      document.getElementById('month-prev').addEventListener('click', () => {
+        monthView = new Date(monthView.getFullYear(), monthView.getMonth() - 1, 1);
+        renderMonth();
+      });
+      document.getElementById('month-next').addEventListener('click', () => {
+        monthView = new Date(monthView.getFullYear(), monthView.getMonth() + 1, 1);
+        renderMonth();
+      });
+      document.addEventListener('change', event => {
+        const taskInput = event.target.closest('[data-task]');
+        const moduleInput = event.target.closest('[data-module]');
+        if (taskInput) {
+          state.done[taskInput.dataset.task] = taskInput.checked;
+          save();
+          refreshViews();
+        }
+        if (moduleInput) {
+          state.modules[moduleInput.dataset.module] = moduleInput.checked;
+          save();
+          updateProgress();
+          renderCoverage();
+          applyFilter();
+        }
+        if (event.target.id === 'day-kind') {
+          state.dayTypes[selectedDate] = event.target.value;
+          save();
+          renderSelectedDate();
+          renderRoutine();
+        }
+        if (event.target.id === 'subject-filter') applyFilter();
+        if (event.target.id === 'practice-subject') {
+          renderPracticePrompt();
+        }
+      });
+      const prompts = [
+        { subject: 'math', question: 'A two-variable LPP has constraints x ≥ 0, y ≥ 0, x + y ≤ 6 and 2x + y ≤ 8. Sketch the feasible region and list its corner points.', guide: 'Draw both boundary lines in the first quadrant, shade their common feasible side, and test the axis intercepts and line intersection. The intersection of x+y=6 and 2x+y=8 is (2,4); also check (0,0), (4,0) and (0,6).' },
+        { subject: 'math', question: 'Give an example of a relation that is not a function, and explain why.', guide: 'Choose a relation where one input is paired with two different outputs. A function must assign exactly one output to every input in its domain.' },
+        { subject: 'math', question: 'If demand is q = 20 − 2p, write the total revenue function and find revenue when p = 5.', guide: 'TR = p × q = p(20 − 2p). At p=5, q=10 and TR=50.' },
+        { subject: 'economics', question: 'Draw a demand curve shift caused by a rise in consumer income for a normal good. What happens to equilibrium price and quantity if supply stays fixed?', guide: 'Demand shifts right. With the supply curve unchanged, equilibrium price and quantity both rise.' },
+        { subject: 'economics', question: 'Distinguish real GDP from nominal GDP and state why the difference matters.', guide: 'Nominal GDP uses current prices; real GDP adjusts for price changes using a base-year price measure. Real GDP helps separate changes in output from inflation.' },
+        { subject: 'economics', question: 'Use a small example to explain comparative advantage and gains from trade.', guide: 'Compare opportunity costs, not only total output. Each party specialises in the good with the lower opportunity cost, then trades at a mutually beneficial rate between their opportunity costs.' },
+        { subject: 'physics', question: 'A fair coin is tossed twice. What is the probability of exactly one head?', guide: 'The sample space is HH, HT, TH, TT. Two of four outcomes have exactly one head, so the probability is 1/2.' },
+        { subject: 'physics', question: 'For data 2, 4, 4, 6, find the mean and median.', guide: 'Mean = 16/4 = 4. The middle pair is 4 and 4, so median = 4.' },
+        { subject: 'physics', question: 'When is a histogram more suitable than a bar chart?', guide: 'Use a histogram for grouped continuous numerical data. Its adjoining bars represent class intervals; a bar chart compares separate categories.' },
+        { subject: 'history', question: 'Name the three generations of human rights and give one broad example of each.', guide: 'First: civil and political rights; second: economic, social and cultural rights; third: collective or solidarity rights such as development or a healthy environment.' },
+        { subject: 'history', question: 'Write a short comparison of the UDHR and the two 1966 Covenants.', guide: 'The UDHR states a broad common standard. The ICCPR focuses on civil and political rights, while the ICESCR covers economic, social and cultural rights.' },
+        { subject: 'history', question: 'How did the Indian Constitution support the protection of rights?', guide: 'Discuss enforceable Fundamental Rights and the Directive Principles of State Policy, then connect them to safeguards and institutions in the syllabus.' },
+        { subject: 'english', question: 'Write a clear topic sentence for a short paragraph on climate change.', guide: 'Make one focused claim, for example: “Climate change affects health, livelihoods and ecosystems, so communities need both lower emissions and practical adaptation.” Support it with an example.' },
+        { subject: 'english', question: 'Name two barriers to effective listening and one way to reduce each.', guide: 'Examples include noise (move to a quieter place), unfamiliar vocabulary (note and check key terms), and distraction (put devices aside and summarise what you heard).' },
+        { subject: 'english', question: 'What should a short speech opening do?', guide: 'Address the audience, establish the topic and purpose, and offer a clear route into the main points. Keep it brief and relevant.' },
+        { subject: 'malayalam', question: 'ഒരു ചെറുകഥ വിശകലനം ചെയ്യുമ്പോൾ ശ്രദ്ധിക്കേണ്ട മൂന്ന് ഘടകങ്ങൾ എഴുതുക.', guide: 'കഥയുടെ പ്രമേയം, കഥാപാത്രങ്ങൾ, ആഖ്യാനരീതി, ഭാഷ, സാമൂഹിക പശ്ചാത്തലം എന്നിവയിൽ നിന്ന് കുറഞ്ഞത് മൂന്ന് ഘടകങ്ങൾ ഉദാഹരണങ്ങളോടെ വിശദീകരിക്കുക.' },
+        { subject: 'malayalam', question: 'നവോത്ഥാനകാല ചെറുകഥകളിൽ സാമൂഹിക മാറ്റം എങ്ങനെ പ്രതിഫലിക്കുന്നു?', guide: 'വിദ്യാഭ്യാസം, സാമൂഹിക പരിഷ്കാരം, യാഥാർത്ഥ്യബോധം, മാനവികത, സ്ത്രീകളുടെയും പിന്നാക്കവിഭാഗങ്ങളുടെയും അനുഭവങ്ങൾ എന്നിവ കഥയുടെ ഉദാഹരണങ്ങളുമായി ബന്ധിപ്പിക്കുക.' },
+        { subject: 'malayalam', question: 'ഒരു കഥാസ്വാദനക്കുറിപ്പിന് ഉൾപ്പെടുത്താവുന്ന കാര്യങ്ങൾ പറയുക.', guide: 'കഥയുടെ പേര്/രചയിതാവ്, പ്രധാന പ്രമേയം, ശ്രദ്ധേയമായ കഥാപാത്രം അല്ലെങ്കിൽ സംഭവം, ഭാഷാശൈലി, നിങ്ങളുടെ വിലയിരുത്തൽ എന്നിവ ചുരുക്കമായി ചേർക്കാം.' }
+      ];
+      let currentPrompt = null;
+      function renderPracticePrompt() {
+        const subject = document.getElementById('practice-subject').value;
+        const choices = prompts.filter(prompt => subject === 'all' || prompt.subject === subject);
+        const next = choices[Math.floor(Math.random() * choices.length)];
+        currentPrompt = next;
+        document.getElementById('practice-question').innerHTML = `<span class="practice-subject">${escapeHTML(subjects[next.subject].label)}</span><p>${escapeHTML(next.question)}</p>`;
+        const answer = document.getElementById('answer-guide');
+        answer.textContent = next.guide;
+        answer.classList.add('hidden');
+      }
+      renderPracticePrompt();
+      document.getElementById('new-practice').addEventListener('click', renderPracticePrompt);
+      document.getElementById('show-answer').addEventListener('click', () => {
+        document.getElementById('answer-guide').classList.toggle('hidden');
+      });
+      document.getElementById('doubt-form').addEventListener('submit', event => {
+        event.preventDefault();
+        const course = document.getElementById('doubt-subject').value;
+        const subject = Object.values(subjects).find(item => item.label === course) ? course : course;
+        state.doubts.unshift({
+          id: String(Date.now()),
+          subject,
+          topic: document.getElementById('doubt-topic').value.trim(),
+          note: document.getElementById('doubt-note').value.trim(),
+          date: dateLabel(toISO(new Date())),
+          solved: false
+        });
+        save();
+        event.target.reset();
+        renderDoubts();
+      });
+      document.getElementById('routine-toggle').addEventListener('click', () => {
+        const editor = document.getElementById('routine-editor');
+        editor.open = !editor.open;
+        if (editor.open) editor.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+      document.getElementById('save-routine').addEventListener('click', () => {
+        for (const slot of Object.keys(defaultRoutine)) {
+          const start = document.getElementById(`routine-${slot}-start`).value;
+          const end = document.getElementById(`routine-${slot}-end`).value;
+          if (start && end) state.routine[slot] = { start, end };
+        }
+        save();
+        refreshViews();
+        document.getElementById('routine-editor').open = false;
+      });
+      document.getElementById('subject-filter').addEventListener('change', applyFilter);
+      document.getElementById('print-button').addEventListener('click', () => window.print());
+      let installPromptEvent = null;
+      window.addEventListener('beforeinstallprompt', event => {
+        event.preventDefault();
+        installPromptEvent = event;
+      });
+      document.getElementById('shortcut-button').addEventListener('click', async () => {
+        if (installPromptEvent) {
+          installPromptEvent.prompt();
+          const choice = await installPromptEvent.userChoice;
+          if (choice.outcome === 'accepted') document.getElementById('shortcut-button').textContent = 'Shortcut added';
+          installPromptEvent = null;
+          return;
+        }
+        const dialog = document.getElementById('shortcut-dialog');
+        if (typeof dialog.showModal === 'function') dialog.showModal();
+        else window.alert('Open your browser menu and choose Add to Home screen or Create shortcut. Local HTML files may not support this option.');
+      });
+      window.addEventListener('appinstalled', () => {
+        document.getElementById('shortcut-button').textContent = 'Planner added';
+      });
+      document.getElementById('reset-button').addEventListener('click', () => {
+        if (window.confirm('Reset all planner checkmarks, routines and saved doubts on this browser?')) {
+          state = { done: {}, modules: {}, routine: defaultRoutine, dayTypes: {}, catchup: {}, doubts: [] };
+          save();
+          window.location.reload();
+        }
+      });
+      window.setInterval(() => {
+        renderToday();
+        renderSelectedDate();
+        renderWeeks(learningDays, document.getElementById('learning-plan'), 'Learning week');
+        renderWeeks(revisionSchedule, document.getElementById('revision-plan'), 'Revision week');
+        renderMonth();
+        applyFilter();
+      }, 30000);
+    })();
+  </script>
+
+</body>
+</html>
